@@ -1,6 +1,10 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example'
-{ pkgs, ... }: {
+{ nixpkgs, system, ... }:
+let
+  pkgs = nixpkgs.legacyPackages.${system};
+in
+{
 
    #example = pkgs.callPackage ./example { };
    # i think its pkgs.additions.spotify-adblock?

@@ -44,7 +44,7 @@
     in
     rec {
       # Packages for all systems
-      packages = forAllSystems (system: import ./pkgs { inherit system; inherit (inputs) nixpkgs; });
+      packages = forAllSystems (system: import ./pkgs { inherit system nixpkgs; });
 
       # Overlays
       overlays = forAllSystems (system: import ./overlays { inherit system nixpkgs; });
