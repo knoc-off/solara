@@ -1,9 +1,6 @@
 # Custom packages, that can be defined similarly to ones from nixpkgs
 # You can build them using 'nix build .#example'
-{ nixpkgs, system, ... }:
-let
-  pkgs = nixpkgs.legacyPackages.${system};
-in
+{ pkgs, ... }:
 {
 
    #example = pkgs.callPackage ./example { };
