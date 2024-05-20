@@ -1,5 +1,5 @@
 {
-  description = "A declarative Nix config";
+  description = "Solara is my utility flake.";
 
   inputs = {
     # Nixpkgs
@@ -41,7 +41,8 @@
       packages = forAllSystems (system: import ./pkgs { inherit system nixpkgs; });
 
       # Overlays
-      overlays = forAllSystems (system: import ./overlays { inherit system nixpkgs; });
+      #overlays = forAllSystems (system: import ./overlays { inherit system nixpkgs; });
+      overlays =  import ./overlays { inherit nixpkgs; };
 
       # NixOS modules
       nixosModules = import ./nixos/modules;
