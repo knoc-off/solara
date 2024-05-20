@@ -1,11 +1,15 @@
-self: super: {
-  # Additions, which can import custom packages
-  additions = final: prev: import ../pkgs { pkgs = final; };
+{
+  inputs,
+  ...
+}: {
 
-  # Modifications to existing packages
-  modifications = final: prev: {
-    # Override the spotify package to include spotiblock functionality
-    spotiblock = prev.spotify.overrideAttrs (oldAttrs: rec {
+  # Adds my custom packages
+  additions = final: prev: import ../pkgs {pkgs = final;};
+
+
+  modifications = _final: prev: {
+
+    spotiblock = prev.spotify.overrideAttrs (_old: rec {
       postInstall = ''
         ExecMe="env LD_PRELOAD=${prev.spotify-adblock}/lib/libspotifyadblock.so spotify"
         sed -i "s|^TryExec=.*|TryExec=$ExecMe %U|" $out/share/applications/spotify.desktop
@@ -13,9 +17,11 @@ self: super: {
       '';
     });
 
-    # Modify the steam package to include forced desktop scaling
-    steam-scaling = prev.steamPackages.steam-fhsenv.override (oldAttrs: rec {
-      extraArgs = (oldAttrs.extraArgs or "") + " -forcedesktopscaling 1.0 ";
+    steam-scaling = prev.steamPackages.steam-fhsenv.override (old: rec {
+      extraArgs = (old.extraArgs or "") + " -forcedesktopscaling 1.0 ";
     });
+
   };
+
 }
+

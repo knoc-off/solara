@@ -42,7 +42,7 @@
 
       # Overlays
       #overlays = forAllSystems (system: import ./overlays { inherit system nixpkgs; });
-      overlays =  import ./overlays;
+      overlays =  import ./overlays { inherit inputs; };
 
       # NixOS modules
       nixosModules = import ./nixos/modules;
