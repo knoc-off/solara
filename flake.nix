@@ -14,12 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hardware-specific configurations
-    hardware.url = "github:nixos/nixos-hardware";
-
-    # Neovim config
-    nixvim-flake.url = "github:knoc-off/neovim-config";
-
     # Firefox add-ons
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
